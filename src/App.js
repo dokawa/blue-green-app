@@ -1,23 +1,26 @@
 import logo from './logo.svg';
 import './App.css';
+import * as all from 'colors.css'
 
 function App() {
+
+  const color = "orange"
+
+  const bg = `linear-gradient(to bottom left, #FCFCFC, ${color})`
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <div backgroundColor="grey" className="App">
+      <div className="App-header">
+        <div style={{borderRadius: "5px", 
+                      backgroundImage: bg,
+                      padding: "20px",
+                      boxShadow: "0 4px 8px 0 rgba(0,0,0,0.2);",
+                      transition: "0.3s",
+                    }}
         >
-          Learn React
-        </a>
-      </header>
+          <div style={{backgroundColor: "555"}}>Hello, this is {color}</div>
+        </div>
+      </div>
     </div>
   );
 }
