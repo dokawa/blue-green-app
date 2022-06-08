@@ -1,12 +1,12 @@
-import logo from './logo.svg';
 import './App.css';
-import * as all from 'colors.css'
 
 function App() {
 
-  const color = "orange"
+  const colors = {blue: "blue", green: "green", red: "red", purple: "purple", orange: "orange"} 
 
-  const bg = `linear-gradient(to bottom left, #FCFCFC, ${color})`
+  const color = colors.purple
+
+  const bg = `linear-gradient(to bottom left, #EEE, ${color})`
 
   return (
     <div backgroundColor="grey" className="App">
@@ -18,7 +18,7 @@ function App() {
                       transition: "0.3s",
                     }}
         >
-          <div style={{backgroundColor: "555"}}>Hello, this is {color}</div>
+          <div style={{ color: "555"}}>Hello, this is {color}</div>
         </div>
       </div>
     </div>
