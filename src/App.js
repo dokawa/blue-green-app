@@ -4,7 +4,7 @@ function App() {
 
   const colors = {blue: "blue", green: "green", red: "red", purple: "purple", orange: "orange"} 
 
-  const color = colors.blue
+  const color = colors.green
 
   const bg = `linear-gradient(to bottom left, #EEE, ${color})`
 

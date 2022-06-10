@@ -1,0 +1,61 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: istio-canary
+spec:
+  workspaces:
+    - name: istio-manifest-dir
+      description: >-
+        The workspace consisting of Istio manifests such as Gateway,
+        DestinationRule and VirtualService in case applying for the
+        first time.
+  params:
+    - name: VIRTUAL_SERVICE_NAME
+      type: string
+      default: ""
+    - name: APP_NAME
+      type: string
+      default: ""
+    - name: CURRENT_WEIGHT
+      type: string
+      default: ""
+    - name: NEXT_WEIGHT
+      type: string
+      default: ""
+    - name: GATEWAY_NAME
+      type: string
+      default: ""
+  steps:
+    - name: canary-deploy
+      image: quay.io/openshift/origin-cli:4.6
+      workingDir: $(workspaces.istio-manifest-dir.path)
+      script: |
+        #!/usr/bin/env bash
+
+        cat <<EOF >/tmp/patch.yaml
+        apiVersion: networking.istio.io/v1alpha3
+        kind: VirtualService
+        metadata:
+          name: $(params.VIRTUAL_SERVICE_NAME)
+        spec:
+          hosts:
+            - "*"
+          gateways:
+            - $(params.GATEWAY_NAME)
+          http:
+            - route:
+                - destination:
+                    host: $(params.APP_NAME)
+                    subset: v1
+                  weight: $(params.CURRENT_WEIGHT)
+                - destination:
+                    host: $(params.APP_NAME)
+                    subset: v2
+                  weight: $(params.NEXT_WEIGHT)
+        EOF
+
+        # if [ -n "$(params.CURRENT_WEIGHT)" -a -n "$(params.NEXT_WEIGHT)" ]; then
+        kubectl replace -f /tmp/patch.yaml
+        # else
+        #   kubectl apply -f ./
+        # fi

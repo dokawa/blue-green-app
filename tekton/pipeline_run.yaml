@@ -1,0 +1,24 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  generateName: deploy-run-
+spec:
+  serviceAccountName: dockerhub-account 
+  pipelineRef:
+    name: deploy
+  params:
+    - name: IMAGE
+      value: docker.io/deltael/blue-green-app
+    - name: TAG
+      value: v1
+    - name: DEPLOYMENT_NAMESPACE
+      value: default
+  workspaces:
+    - name: shared-workspace
+      volumeClaimTemplate:
+        spec:
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 10Gi
