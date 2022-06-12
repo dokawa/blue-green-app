@@ -16,16 +16,16 @@ spec:
       workingDir: $(workspaces.working-dir.path)
       script: |
         #!/usr/bin/env bash
-        cat <<EOF >.$(params.DEPLOY_DIR)/kustomization.yaml
-          nameSuffix: $(params.VERSION)
-          commonLabels:
-            version: $(params.VERSION)
-          resources:
-          - deployment.yaml
-          images:
-          - name: deltael/blue-green-app
-            newTag: $(params.VERSION)
-          EOF
+        cat <<EOF >$(params.DEPLOY_DIR)/kustomization.yaml
+        nameSuffix: -$(params.VERSION)
+        commonLabels:
+          version: $(params.VERSION)
+        resources:
+        - deployment.yaml
+        images:
+        - name: deltael/blue-green-app
+          newTag: $(params.VERSION)
+        EOF
 
         kubectl apply -k $(params.DEPLOY_DIR)
  

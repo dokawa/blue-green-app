@@ -59,7 +59,7 @@ spec:
         name: deploy-task
       params:
         - name: DEPLOY_DIR
-          value: ./
+          value: .
         - name: VERSION
           value: $(params.TAG)
       runAfter:

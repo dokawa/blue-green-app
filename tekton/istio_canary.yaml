@@ -5,10 +5,6 @@ metadata:
 spec:
   workspaces:
     - name: istio-manifest-dir
-      description: >-
-        The workspace consisting of Istio manifests such as Gateway,
-        DestinationRule and VirtualService in case applying for the
-        first time.
   params:
     - name: VIRTUAL_SERVICE_NAME
       type: string
