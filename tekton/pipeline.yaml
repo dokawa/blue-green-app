@@ -10,6 +10,8 @@ spec:
   workspaces:
     - name: shared-workspace
   tasks:
+
+
     - name: clone-repository
       taskRef:
         name: git-clone
@@ -22,23 +24,11 @@ spec:
         - name: subdirectory
           value: ""
         - name: revision
-          value: "test-docker"
+          value: "dev"
         - name: deleteExisting
           value: "true"
-    - name: install-dependencies
-      taskRef:
-        name: npm
-      workspaces:
-        - name: source
-          workspace: shared-workspace
-      params:
-        - name: PATH_CONTEXT
-          value: "app"
-        - name: ARGS
-          value:
-            - clean-install
-      runAfter:
-        - clone-repository
+
+
     - name: build-push-image
       taskRef:
         name: buildah
@@ -53,7 +43,9 @@ spec:
         - name: FORMAT
           value: "docker"
       runAfter:
-        - "install-dependencies"
+        - "clone-repository"
+
+
     - name: deploy-app
       taskRef:
         name: deploy-task
@@ -64,12 +56,11 @@ spec:
           value: $(params.TAG)
       runAfter:
         - build-push-image
-        # - clone-repository
       workspaces:
         - name: working-dir
           workspace: shared-workspace
 
-      
+
     - name: blue-green-deploy
       taskRef:
         name: istio-canary

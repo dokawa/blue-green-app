@@ -28,4 +28,7 @@ spec:
         EOF
 
         kubectl apply -k $(params.DEPLOY_DIR)
+
+        # This forces kubernetes pull the image even though the tag didn't change
+        kubectl rollout restart deployment/blue-green-app-$(params.VERSION)
  
