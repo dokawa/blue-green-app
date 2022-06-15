@@ -10,7 +10,7 @@ spec:
     - name: IMAGE
       value: docker.io/deltael/blue-green-app
     - name: TAG
-      value: v2
+      value: v1
     - name: DEPLOYMENT_NAMESPACE
       value: default
     - name: CURRENT_WEIGHT
