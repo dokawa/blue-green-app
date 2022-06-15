@@ -50,8 +50,4 @@ spec:
                   weight: $(params.NEXT_WEIGHT)
         EOF
 
-        # if [ -n "$(params.CURRENT_WEIGHT)" -a -n "$(params.NEXT_WEIGHT)" ]; then
-        kubectl replace -f /tmp/patch.yaml
-        # else
-        #   kubectl apply -f ./
-        # fi
+        kubectl apply -f /tmp/patch.yaml

@@ -7,6 +7,8 @@ spec:
     - name: IMAGE
     - name: TAG
     - name: DEPLOYMENT_NAMESPACE
+    - name: NEXT_WEIGHT
+    - name: CURRENT_WEIGHT
   workspaces:
     - name: shared-workspace
   tasks:
@@ -70,9 +72,9 @@ spec:
         - name: APP_NAME
           value: blue-green-app
         - name: NEXT_WEIGHT
-          value: 50
+          value: $(params.NEXT_WEIGHT)
         - name: CURRENT_WEIGHT
-          value: 50
+          value: $(params.CURRENT_WEIGHT)
         - name: GATEWAY_NAME
           value: blue-green-gateway
       runAfter:
