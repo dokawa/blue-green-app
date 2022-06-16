@@ -2,5 +2,6 @@
 
 This repo is meant to be used as a resource for a blue green deployment. I decided to create my own page, since most examples look like this:
 
-<img src="https://via.placeholder.com/150/0000FF/000000?text=Blue">
-<img src="https://via.placeholder.com/150/00FF00/000000?text=Green">
+
+![image](https://user-images.githubusercontent.com/45212911/173974747-885d6114-d6fc-465f-bf0e-9acbeff43187.png)
+![image](https://user-images.githubusercontent.com/45212911/173974772-9a5196b9-475e-4fcb-ad72-c1565c86f97d.png)
